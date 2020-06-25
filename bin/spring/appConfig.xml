@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	   					   http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+	   					   http://www.springframework.org/schema/tx 
+	   					   http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
+						   http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd"
+	   default-lazy-init="false" >
+
+
+	<!-- instantiate a Tiger object -->
+	<!-- assigns ammo to it via a setAmmoLeft(int) method -->
+   	<bean id="tigerTank" class="tanks.Tiger">
+	    <property name="ammoLeft" value="30" />
+	</bean>
+
+	<!-- instantiate a KingTiger object -->
+	<!-- assigns ammo to it via a setAmmoLeft(int) method -->
+   	<bean id="kingTigerTank" class="tanks.KingTiger">
+	    <property name="ammoLeft" value="100" />
+	</bean>
+
+	<!-- instantiate a TankParade object -->
+	<!-- assigns a List to it via a setTanks(List) method -->
+	<!-- uses the bean ids to refer to previously defined beans -->
+   	<bean id="tankParade" class="tanks.TankParade" init-method="start">
+	    <property name="tanks">
+	    	<list>
+	    		<ref bean="tigerTank" />
+	    		<ref bean="kingTigerTank" />
+	    	</list>
+	    </property>
+	</bean>
+	
+	
+</beans>
